@@ -3,6 +3,7 @@
 
 # FCM-palpitate
 缓存.sh 初始版本
+
 FCM.sh 持续更新版本
 
 可在无root环境下给fcm发送心跳广播进行活跃行为
