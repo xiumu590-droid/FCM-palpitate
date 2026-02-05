@@ -1,12 +1,13 @@
 # 介绍&教程
  酷安:@裘穆 @陌问花
  教程:将脚本移动到一下路径
- 
+ ```
  /data/local/tmp/ 
- 
- 然后执行
- 
+ ```
+ 然后执行:
+ ```
  cd /data/local/tmp/ && nohup ./FCM.sh &
+ ```
 
 # FCM-palpitate
 可在无root环境下给fcm发送心跳广播进行活跃行为
