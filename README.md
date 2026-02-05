@@ -8,6 +8,10 @@
  ```
  cd /data/local/tmp/ && nohup ./FCM.sh &
  ```
+ 终止进程指令:
+ ```
+ pkill -15 FCM.sh
+ ```
 
 # FCM-palpitate
 可在无root环境下给fcm发送心跳广播进行活跃行为
