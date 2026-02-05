@@ -1,11 +1,14 @@
-# 酷安
+# 介绍&教程
  酷安:@裘穆 @陌问花
+ 教程:将脚本移动到一下路径
+ 
+ /data/local/tmp/ 
+ 
+ 然后执行
+ 
+ cd /data/local/tmp/ && nohup ./FCM.sh &
 
 # FCM-palpitate
-缓存.sh 初始版本
-
-FCM.sh 持续更新版本
-
 可在无root环境下给fcm发送心跳广播进行活跃行为
 使它可以在断掉后被脚本检查让后发送广播从新拉起
 
