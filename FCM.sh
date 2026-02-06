@@ -1,4 +1,3 @@
-# 会将持续更新 酷安:@裘穆 @陌问花
 LOG_MAIN="/sdcard/应用白名单移除.log"
 LOG_FCM="/sdcard/fcm广播.log"
 MAX_SIZE_KB=50
@@ -66,14 +65,25 @@ get_fcm_packages() {
 
 remove_whitelist() {
     local pkg_name="$1" app_name="$2"
+    
+    # 检查当前白名单状态
+    local whitelist_status=$(dumpsys deviceidle whitelist 2>/dev/null | grep -q "^${pkg_name}$" && echo "true" || echo "false")
+    
     echo "[${app_name}]: "
     echo "  包名: ${pkg_name}"
-    dumpsys deviceidle whitelist -"${pkg_name}" >/dev/null 2>&1
-    local exit_code=$?
-    if [ $exit_code -eq 0 ]; then
-        echo "  状态: ✓ 已移除白名单"
+    
+    if [ "$whitelist_status" = "true" ]; then
+        # 在白名单中，执行移除操作
+        dumpsys deviceidle whitelist -"${pkg_name}" >/dev/null 2>&1
+        local exit_code=$?
+        if [ $exit_code -eq 0 ]; then
+            echo "  状态: ✓ 已在白名单中，已移除白名单"
+        else
+            echo "  状态: ✗ 已在白名单中，但移除失败(码:$exit_code)"
+        fi
     else
-        echo "  状态: ✗ 失败(码:$exit_code)"
+        # 不在白名单中，跳过
+        echo "  状态: - 不在白名单中，跳过"
     fi
     echo ""
 }
@@ -307,7 +317,7 @@ main_loop() {
             echo "完成时间: $(date '+%F %T')"
             echo ""
         } >> "$LOG_MAIN"
-        sleep 2700
+        sleep 1350
     done
 }
 
