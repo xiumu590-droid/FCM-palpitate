@@ -1,5 +1,6 @@
-# 介绍&教程 * [版本日志](https://github.com/xiumu590-droid/FCM-palpitate/blob/main/%E7%89%88%E6%9C%AC%E6%97%A5%E5%BF%97.md
-)
+# 介绍&教程
+ * [版本日志](https://github.com/xiumu590-droid/FCM-palpitate/blob/main/%E7%89%88%E6%9C%AC%E6%97%A5%E5%BF%97.md)
+
  酷安:@裘穆 @陌问花
 
  教程:将脚本移动到已下 路径:
