@@ -9,7 +9,7 @@
  ```
  然后执行:
  ```
- cd /data/local/tmp/ && nohup ./FCM.sh &
+ nohup ./FCM.sh & #后台运行
  ```
  终止进程指令:
  ```
