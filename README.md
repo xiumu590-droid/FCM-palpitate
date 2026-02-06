@@ -11,7 +11,7 @@
  ```
  终止进程指令:
  ```
- pkill -15 FCM.sh
+ pkill -f FCM.sh
  ```
 
 # FCM-palpitate
