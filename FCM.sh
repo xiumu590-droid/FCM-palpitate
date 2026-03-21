@@ -1,6 +1,7 @@
 #!/system/bin/sh
 
 SCRIPT_NAME="${0##*/}"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 FCM_palpitate() {
     script_name="$SCRIPT_NAME"
@@ -33,15 +34,38 @@ FCM_palpitate() {
 
 FCM_palpitate
 
-LOG_FCM="/sdcard/fcm广播.log"
-MAX_SIZE_KB=50
-MAX_SIZE=$((MAX_SIZE_KB * 1024))
-FCM_CHECK_INTERVAL=35
-FCM_MAX_CONNECTION_DURATION=120
+# 配置加载
+# 定义配置文件路径
+CONFIG_FILE="${SCRIPT_DIR}/fcm_config.conf"
 
+# 如果配置文件不存在，则生成默认配置
+if [ ! -f "$CONFIG_FILE" ]; then
+    cat > "$CONFIG_FILE" << 'EOF'
+# FCM_palpitate 配置文件
+# 修改配置后请重启脚本以使更改生效
+
+# 日志文件储存路径
+LOG_FCM="/sdcard/fcm广播.log"
+# 日志最大大小 (KB)
+MAX_SIZE_KB=50
+# 检查间隔 (秒)
+FCM_CHECK_INTERVAL=35
+# 强制心跳阈值 (秒)
+FCM_MAX_CONNECTION_DURATION=120
+# 兜底检测差值范围 (秒)
 SAFEGUARD_MIN_DIFF=-20
 SAFEGUARD_MAX_DIFF=30
+# 兜底检测最小持续时间 (秒)
 SAFEGUARD_MIN_DURATION=1
+EOF
+    echo "已生成默认配置文件：${CONFIG_FILE}"
+fi
+
+# 加载外部配置 (覆盖默认值)
+. "$CONFIG_FILE"
+
+# 依赖配置的计算 (必须在加载配置后执行)
+MAX_SIZE=$((MAX_SIZE_KB * 1024))
 
 check_and_clean_log() {
     local log_file="$1"
